@@ -24,7 +24,7 @@ void Array2Dconverter(int arr[], int a[SIZE][SIZE], int m, int n)
 {
 	int row, column;
 	int counter = 0;
-	//Convert 1D array to 2D array
+	//Convert array
 	for (row = 0; row <= (m - 1); row ++){
 		for (column = 0; column <= (n - 1); column ++){
 			a[row][column] = arr[counter];
@@ -36,8 +36,36 @@ void Array2Dconverter(int arr[], int a[SIZE][SIZE], int m, int n)
 void Ex5(int arr[], int m, int n){
 	int a[SIZE][SIZE];
 	Array2Dconverter(arr,a,m,n);
-	//Your codes here
+	
+	//your codes here
 
+	int i, row, column;
+	int minRow[SIZE] = {0};
+
+	int min, max;
+	max = minRow[0];
+
+	//FIND MIN
+	for (row = 0; row <= (m - 1); row ++){
+
+		min = a[row][0];
+
+		for (column = 0; column <= (n - 1); column ++){
+			if (a[row][column] < min){
+				min = a[row][column];
+			}
+		}
+
+		minRow[row] = min;
+	}
+
+	//FIND MAX
+	for (i = 0; i < m; i++){
+		if (minRow[i] > max)
+			max = minRow[i];
+	}
+
+	printf("%d", max);
 }
 
 int main(int argc, char *argv[]) {

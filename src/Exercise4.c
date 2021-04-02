@@ -26,7 +26,7 @@ void Array2Dconverter(int arr[], int a[SIZE][SIZE], int m, int n)
 {
 	int row, column;
 	int counter = 0;
-	//Convert 1D array to 2D array
+	//Convert array
 	for (row = 0; row <= (m - 1); row ++){
 		for (column = 0; column <= (n - 1); column ++){
 			a[row][column] = arr[counter];
@@ -49,22 +49,78 @@ void printArray(int a[SIZE][SIZE], int m, int n)
 
 void insertRow(int arr[], int a[SIZE][SIZE],int rowIndex, int m, int n){
 	//Your codes here
-	
+	int row, column;
+
+	int new_m = m++; //increase the row size by 1
+
+	//move the elements one-row downward
+	for (column = 0; column <= (n - 1); column ++){
+		for (row = new_m; row >= rowIndex; row --){
+			a[row][column] = a[row - 1][column];
+		}
+	}
+
+	//insert row
+	int i = 0;
+	for (column = 0; column <= (n - 1); column ++){
+		a[rowIndex][column] = arr[i];
+		i++;
+	}
+
+	printArray(a, new_m + 1, n);
 }
 
 void removeRow(int a[SIZE][SIZE], int rowIndex, int m, int n){
 	//Your codes here
-	
+	int row, column;
+	int new_m = m--;
+
+	//move the elements one-row upward
+	for (column = 0; column <= (n - 1); column ++){
+		for (row = rowIndex; row <= (m - 1); row ++){
+			a[row][column] = a[row + 1][column];
+		}
+	}
+
+	printArray(a, new_m - 1, n);
 }
 
 void insertCol(int arr[], int a[SIZE][SIZE],int colIndex, int m, int n){
 	//Your codes here
+	int row, column;
 	
+	int new_n = n++; //increase the column size by 1
+
+	//move the elements one-column to the right
+	for (row = 0; row <= (m - 1); row ++){
+		for (column = new_n; column >= colIndex; column --){
+			a[row][column] = a[row][column - 1];
+		}
+	}
+
+	//insert column
+	int i = 0;
+	for (row = 0; row <= (m - 1); row ++){
+		a[row][colIndex] = arr[i];
+		i++;
+	}
+
+	printArray(a, m, new_n + 1);
 }
 
 void removeCol(int a[SIZE][SIZE], int colIndex, int m, int n){
 	//Your codes here
-	
+	int row, column;
+	int new_n = n--;
+
+	//move the elements one-column to the left
+	for (row = 0; row <= (m - 1);  row ++){
+		for (column = colIndex; column <= (n - 1); column ++){
+			a[row][column] = a[row][column + 1];
+		}
+	}
+
+	printArray(a, m, new_n - 1);
 }
 
 int main(int argc, char *argv[]) {

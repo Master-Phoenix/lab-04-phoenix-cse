@@ -26,7 +26,7 @@ void Array2Dconverter(int arr[], int a[SIZE][SIZE], int m, int n)
 {
 	int row, column;
 	int counter = 0;
-	//Convert 1D array to 2D array
+	//Convert array
 	for (row = 0; row <= (m - 1); row ++){
 		for (column = 0; column <= (n - 1); column ++){
 			a[row][column] = arr[counter];
@@ -51,7 +51,29 @@ void Ex3(int in_arr[], int n){
 	int a[SIZE][SIZE];
 	Array2Dconverter(in_arr,a,n,n);
 	//Your codes here
-	
+	int row, column, size;
+	//sort first diagonal - increasing
+	int i, j, temp;
+	for (size = 0; size <= (n - 1); size++){
+		for (j = size + 1; j < n; j++){
+			if (a[j][j] < a[size][size]){
+				temp = a[j][j];
+				a[j][j] = a[size][size];
+				a[size][size] = temp;
+			}
+		}
+	}
+
+	//sort second diagonal - decreasing
+	for (row = (n - 1), column = 0; (row >= 0) && (column <= (n - 1)); row --, column ++){
+		for (i = row - 1, j = column + 1; (i >= 0) && (j < n); i--, j++){
+			if (a[i][j] > a[row][column]){
+				temp = a[i][j];
+				a[i][j] = a[row][column];
+				a[row][column] = temp;
+			}
+		}
+	}
 	printArray(a,n,n);
 }
 
